@@ -1,0 +1,72 @@
+<mvc:View
+    controllerName="soupapp.controller.Master"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:grid="sap.ui.layout.cssgrid"
+    xmlns:f="sap.f"
+>
+    >
+    <Page
+        id="idPage"
+        title="{i18n>title}"
+    >
+        <f:GridList
+            id="idSoupGridList"
+            headerText="A list of all the soups"
+            items="{ path: '/Soup', parameters: {$expand: 'ratings'} }"
+            class="sapUiResponsiveContentPadding"
+            selectionChange="onSoupGridListSelectionChange"
+            mode="SingleSelectMaster"
+        >
+            <f:customLayout>
+                <grid:GridBasicLayout
+                    id="idGridBasicLayout"
+                    gridTemplateColumns="repeat(auto-fit, minmax(16rem, 1fr))"
+                    gridGap="0.5rem"
+                />
+            </f:customLayout>
+
+            <f:GridListItem
+                id="idGridListItem"
+                highlight="{= ${avgRating} > 3 ? 'Success' : 'Error'}"
+                press="onGridListItemPress"
+                type="Active"
+            >
+                <HBox
+                    id="idHBox"
+                    height="100%"
+                    width="100%"
+                    class="sapUiSmallMargin"
+                    fitContainer="true"
+                >
+                    <VBox id="id2VBox">
+                        <Title
+                            id="idNameGliTitle"
+                            text="{name}"
+                            wrapping="true"
+                        />
+                        <Label
+                            id="idDateLabel"
+                            text="{date}"
+                            wrapping="true"
+                        />
+                        <Label
+                            id="idShortDescrGliLabel"
+                            text="{shortDescr}"
+                            wrapping="true"
+                        />
+                        <RatingIndicator
+                            id="idAvgRatingGliRatingIndicator"
+                            class="sapUiSmallMarginBottom"
+                            value="{avgRating}"
+                            tooltip="Rating Tooltip"
+                            displayOnly="true"
+                            iconSize="22px"
+                        />
+                    </VBox>
+                </HBox>
+            </f:GridListItem>
+        </f:GridList>
+    </Page>
+</mvc:View>

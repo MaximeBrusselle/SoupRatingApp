@@ -1,0 +1,311 @@
+<mvc:View
+    controllerName="soupapp.controller.Detail"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.uxap"
+    xmlns:m="sap.m"
+    displayBlock="true"
+    height="100%"
+    busyIndicatorDelay="0"
+>
+    <ObjectPageLayout
+        id="idObjectPageLayout"
+        showTitleInHeaderContent="true"
+        upperCaseAnchorBar="false"
+    >
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle id="idObjectPageDynamicHeaderTitle">
+                <expandedHeading>
+                    <m:Title
+                        id="idNameDetailTitle"
+                        text="{name}"
+                        wrapping="true"
+                    />
+                </expandedHeading>
+
+                <snappedHeading>
+                    <m:VBox id="idVBox">
+                        <m:Title
+                            id="idNameDetailSnappedTitle"
+                            text="{name}"
+                            wrapping="true"
+                        />
+                        <m:Label
+                            id="idShortDescrDetailLabel"
+                            text="{shortDescr}"
+                        />
+                    </m:VBox>
+                </snappedHeading>
+
+                <expandedContent>
+                    <m:Label
+                        id="idShortDescrDetailExpandedLabel"
+                        text="{shortDescr}"
+                    />
+                </expandedContent>
+
+                <snappedTitleOnMobile>
+                    <m:Title
+                        id="idNameMobileTitle"
+                        text="{name}"
+                    />
+                </snappedTitleOnMobile>
+
+                <actions>
+                    <m:Button
+                        id="idEditButton"
+                        text="Edit"
+                        type="Emphasized"
+                    />
+                    <m:Button
+                        id="idDeleteButton"
+                        text="Delete"
+                    />
+                    <m:Button
+                        id="idCopyButton"
+                        text="Copy"
+                    />
+                    <m:OverflowToolbarButton
+                        id="idShareOverflowToolbarButton"
+                        icon="sap-icon://action"
+                        type="Transparent"
+                        text="Share"
+                        tooltip="action"
+                    />
+                </actions>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+
+        <headerContent>
+            <m:FlexBox
+                id="idFlexBox"
+                wrap="Wrap"
+                fitContainer="true"
+            >
+                <m:VBox
+                    id="id3VBox"
+                    class="sapUiLargeMarginEnd sapUiSmallMarginBottom"
+                >
+                    <m:Title
+                        id="idSoupDetailsTitle"
+                        class="sapUiTinyMarginBottom"
+                        text="Soup Details"
+                    />
+
+                    <m:HBox
+                        id="id2HBox"
+                        class="sapUiTinyMarginBottom"
+                        renderType="Bare"
+                    >
+                        <m:Label
+                            id="idDateServedLabel"
+                            text="Date Served:"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <m:Text
+                            id="idDateText"
+                            text=" {date}"
+                        />
+                    </m:HBox>
+
+                    <m:HBox
+                        id="id3HBox"
+                        class="sapUiTinyMarginBottom"
+                        renderType="Bare"
+                    >
+                        <m:Label
+                            id="idVeggieLabel"
+                            text="Veggie:"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <m:ObjectStatus
+                            id="idTODOObjectStatus"
+                            text="TODO"
+                            state="{= true ? 'Success' : 'Error'}"
+                        />
+                    </m:HBox>
+
+                    <m:HBox id="id4HBox">
+                        <m:Label
+                            id="idSpicyLabel"
+                            text="Spicy:"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <m:ObjectStatus
+                            id="idTODO2ObjectStatus"
+                            text="TODO"
+                            state="{= false ? 'Success' : 'Error'}"
+                        />
+                    </m:HBox>
+                </m:VBox>
+
+                <m:VBox
+                    id="id4VBox"
+                    class="sapUiLargeMarginEnd sapUiSmallMarginBottom"
+                >
+                    <m:HBox
+                        id="id5HBox"
+                        class="sapUiTinyMarginBottom"
+                    >
+                        <m:Label
+                            id="idCreatedByLabel"
+                            text="Created By:"
+                            class="sapUiSmallMarginEnd"
+                        />
+                        <m:Text
+                            id="idCreatedByText"
+                            text="{createdBy}"
+                        />
+                    </m:HBox>
+
+                    <m:HBox
+                        id="id6HBox"
+                        class="sapUiTinyMarginBottom"
+                        renderType="Bare"
+                    >
+                        <m:Label
+                            id="idCreatedOnLabel"
+                            text="Created On:"
+                            class="sapUiSmallMarginEnd"
+                        />
+                        <m:Text
+                            id="idCreatedOnText"
+                            text=" {createdAt}"
+                        />
+                    </m:HBox>
+
+                    <m:HBox
+                        id="id7HBox"
+                        class="sapUiTinyMarginBottom"
+                    >
+                        <m:Label
+                            id="idChangedByLabel"
+                            text="Changed By:"
+                            class="sapUiSmallMarginEnd"
+                        />
+                        <m:Text
+                            id="idModifiedByText"
+                            text="{modifiedBy}"
+                        />
+                    </m:HBox>
+
+                    <m:HBox
+                        id="id8HBox"
+                        renderType="Bare"
+                    >
+                        <m:Label
+                            id="idChangedOnLabel"
+                            text="Changed On:"
+                            class="sapUiSmallMarginEnd"
+                        />
+                        <m:Text
+                            id="idModifiedAtText"
+                            text=" {modifiedAt}"
+                        />
+                    </m:HBox>
+                </m:VBox>
+
+                <m:VBox
+                    id="id5VBox"
+                    class="sapUiLargeMarginEnd sapUiSmallMarginBottom"
+                >
+                    <m:Title
+                        id="idDescriptionTitle"
+                        text="Description"
+                        class="sapUiTinyMarginBottom"
+                    />
+                    <m:Text
+                        id="idLongDescrText"
+                        width="320px"
+                        text="{longDescr}"
+                    />
+                </m:VBox>
+
+                <m:VBox
+                    id="id6VBox"
+                    class="sapUiLargeMarginEnd sapUiSmallMarginBottom"
+                >
+                    <m:Title
+                        id="idAverageRatingTitle"
+                        class="sapUiTinyMarginBottom"
+                        text="Average Rating"
+                    />
+                    <m:RatingIndicator
+                        id="idAvgRatingDetailRatingIndicator"
+                        class="sapUiSmallMarginBottom"
+                        value="{avgRating}"
+                        tooltip="Rating Tooltip"
+                        displayOnly="true"
+                        iconSize="32px"
+                    />
+                </m:VBox>
+
+                <m:VBox
+                    id="id8VBox"
+                    class="sapUiLargeMarginEnd sapUiSmallMarginBottom"
+                >
+                    <m:Title
+                        id="idAssemblyOptionTitle"
+                        text="Assembly Option"
+                        class="sapUiTinyMarginBottom"
+                    />
+                    <m:ObjectStatus
+                        id="idToBeSelectedObjectStatus"
+                        text="To Be Selected"
+                        state="Error"
+                        class="sapMObjectStatusLarge"
+                    />
+                </m:VBox>
+
+                <m:VBox
+                    id="id9VBox"
+                    class="sapUiLargeMarginEnd"
+                >
+                    <m:Title
+                        id="idPriceTitle"
+                        text="Price"
+                        class="sapUiTinyMarginBottom"
+                    />
+                    <m:ObjectStatus
+                        id="idEURObjectStatus"
+                        text="579 EUR"
+                        class="sapMObjectStatusLarge"
+                    />
+                </m:VBox>
+
+                <m:VBox
+                    id="id10VBox"
+                    class="sapUiMediumMarginEnd sapUiSmallMarginBottom"
+                >
+                    <m:Title
+                        id="id3Title"
+                        class="sapUiTinyMarginBottom"
+                    >
+                        <m:Link
+                            id="idAverageUserRatingLink"
+                            text="Average User Rating"
+                            press="onAverageUserRatingLinkPress"
+                        />
+                    </m:Title>
+                    <m:Label
+                        id="idReviewsLabel"
+                        text="6 Reviews"
+                    />
+                    <m:RatingIndicator
+                        id="idRatingIndicator"
+                        value="4"
+                        iconSize="16px"
+                    />
+                    <m:VBox
+                        id="id11VBox"
+                        alignItems="End"
+                    >
+                        <m:Text
+                            id="idOutOfText"
+                            text="4.1 out of 5"
+                        />
+                    </m:VBox>
+                </m:VBox>
+            </m:FlexBox>
+        </headerContent>
+    </ObjectPageLayout>
+</mvc:View>
