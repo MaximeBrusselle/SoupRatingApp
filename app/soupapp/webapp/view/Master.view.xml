@@ -30,7 +30,6 @@
             <f:GridListItem
                 id="idGridListItem"
                 highlight="{= ${avgRating} > 3 ? 'Success' : 'Error'}"
-                press="onGridListItemPress"
                 type="Active"
             >
                 <HBox

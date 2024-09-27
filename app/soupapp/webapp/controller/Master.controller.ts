@@ -1,6 +1,4 @@
-import UIComponent from "sap/ui/core/UIComponent";
 import BaseController from "./BaseController";
-import MessageToast from "sap/m/MessageToast";
 
 /**
  * @namespace soupapp.controller
@@ -9,10 +7,12 @@ export default class Master extends BaseController {
 	/*eslint-disable @typescript-eslint/no-empty-function*/
 	public onInit(): void {}
 
-	public onGridListItemPress(oEvent: any): void {
-		MessageToast.show("Pressed item with ID " + oEvent.getSource().getId());
-	}
-
+	/**
+	 * Called when a soup is selected in the master list.
+	 * Gets the id of the selected soup and navigates to the detail page.
+	 * @param {sap.ui.base.Event} oEvent the selection change event
+	 * @private
+	 */
 	public onSoupGridListSelectionChange(oEvent: any): void {
 		const id = oEvent
 			.getParameter("listItem")

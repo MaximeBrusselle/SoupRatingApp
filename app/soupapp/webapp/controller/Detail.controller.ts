@@ -9,24 +9,21 @@ import ODataModel from "sap/ui/model/odata/v4/ODataModel";
 export default class Detail extends BaseController {
 	/*eslint-disable @typescript-eslint/no-empty-function*/
 	public onInit(): void {
-		this.getRouter().getRoute("Detail")?.attachPatternMatched(this._onRouteMatched, this);
+		this.getRouter()
+			.getRoute("Detail")
+			?.attachPatternMatched(this._onRouteMatched, this);
 	}
 
+	/**
+	 * Called when the route is matched. Sets the view element to the respective Soup ID.
+	 * @param {sap.ui.base.Event} oEvent the event with the route match
+	 * @private
+	 */
 	private _onRouteMatched(oEvent: any): void {
 		const oView = this.getView() as View;
 		const id = oEvent.getParameter("arguments").ID;
 		oView.bindElement(`/Soup(${id})`);
 	}
-
-	public onOrderDetailsLinkPress(): void {}
-
-	public onRobotechLinkPress(): void {}
-
-	public onJulieArmstrongLinkPress(): void {}
-
-	public onJohnMillerLinkPress(): void {}
-
-	public onStatusLinkPress(): void {}
 
 	public onAverageUserRatingLinkPress(): void {}
 }
