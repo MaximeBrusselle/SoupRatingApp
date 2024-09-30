@@ -255,56 +255,6 @@
                         class="sapMObjectStatusLarge"
                     />
                 </m:VBox>
-
-                <m:VBox
-                    id="id9VBox"
-                    class="sapUiLargeMarginEnd"
-                >
-                    <m:Title
-                        id="idPriceTitle"
-                        text="Price"
-                        class="sapUiTinyMarginBottom"
-                    />
-                    <m:ObjectStatus
-                        id="idEURObjectStatus"
-                        text="579 EUR"
-                        class="sapMObjectStatusLarge"
-                    />
-                </m:VBox>
-
-                <m:VBox
-                    id="id10VBox"
-                    class="sapUiMediumMarginEnd sapUiSmallMarginBottom"
-                >
-                    <m:Title
-                        id="id3Title"
-                        class="sapUiTinyMarginBottom"
-                    >
-                        <m:Link
-                            id="idAverageUserRatingLink"
-                            text="Average User Rating"
-                            press="onAverageUserRatingLinkPress"
-                        />
-                    </m:Title>
-                    <m:Label
-                        id="idReviewsLabel"
-                        text="6 Reviews"
-                    />
-                    <m:RatingIndicator
-                        id="idRatingIndicator"
-                        value="4"
-                        iconSize="16px"
-                    />
-                    <m:VBox
-                        id="id11VBox"
-                        alignItems="End"
-                    >
-                        <m:Text
-                            id="idOutOfText"
-                            text="4.1 out of 5"
-                        />
-                    </m:VBox>
-                </m:VBox>
             </m:FlexBox>
         </headerContent>
     </ObjectPageLayout>
