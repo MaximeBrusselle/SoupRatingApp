@@ -118,9 +118,9 @@
                             class="sapUiTinyMarginEnd"
                         />
                         <m:ObjectStatus
-                            id="idTODOObjectStatus"
-                            text="TODO"
-                            state="{= true ? 'Success' : 'Error'}"
+                            id="idObjectStatus"
+                            text="{= ${isVeggie} > 0 ? 'Yes' : 'No'}"
+                            state="{= ${isVeggie} > 0 ? 'Success' : 'Error'}"
                         />
                     </m:HBox>
 
@@ -131,9 +131,9 @@
                             class="sapUiTinyMarginEnd"
                         />
                         <m:ObjectStatus
-                            id="idTODO2ObjectStatus"
-                            text="TODO"
-                            state="{= false ? 'Success' : 'Error'}"
+                            id="id2ObjectStatus"
+                            text="{= ${isSpicy} > 0 ? 'Yes' : 'No'}"
+                            state="{= ${isSpicy} > 0 ? 'Success' : 'Error'}"
                         />
                     </m:HBox>
                 </m:VBox>
@@ -225,9 +225,9 @@
                     class="sapUiLargeMarginEnd sapUiSmallMarginBottom"
                 >
                     <m:Title
-                        id="idAverageRatingTitle"
+                        id="idAverageRatingRatingsCountRatingsTitle"
                         class="sapUiTinyMarginBottom"
-                        text="Average Rating"
+                        text="Average Rating ({ratingsCount} ratings)"
                     />
                     <m:RatingIndicator
                         id="idAvgRatingDetailRatingIndicator"
@@ -238,24 +238,63 @@
                         iconSize="32px"
                     />
                 </m:VBox>
-
-                <m:VBox
-                    id="id8VBox"
-                    class="sapUiLargeMarginEnd sapUiSmallMarginBottom"
-                >
-                    <m:Title
-                        id="idAssemblyOptionTitle"
-                        text="Assembly Option"
-                        class="sapUiTinyMarginBottom"
-                    />
-                    <m:ObjectStatus
-                        id="idToBeSelectedObjectStatus"
-                        text="To Be Selected"
-                        state="Error"
-                        class="sapMObjectStatusLarge"
-                    />
-                </m:VBox>
             </m:FlexBox>
         </headerContent>
+        <sections>
+            <ObjectPageSection
+                id="idObjectPageSection"
+                anchorBarButtonColor="Positive"
+                titleUppercase="false"
+                title="Ingredients"
+            >
+                <subSections>
+                    <ObjectPageSubSection id="idObjectPageSubSection">
+                        <blocks>
+                            <m:Text
+                                id="idIngredientsText"
+                                text="{ingredients}"
+                            />
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+            <ObjectPageSection
+                id="id2ObjectPageSection"
+                anchorBarButtonColor="Critical"
+                titleUppercase="false"
+                title="Reviews"
+            >
+                <subSections>
+                    <ObjectPageSubSection id="id2ObjectPageSubSection">
+                        <blocks>
+                            <m:VBox id="id7VBox">
+                                <m:FeedInput
+                                    id="idFeedInput"
+                                    post="onFeedInputPost"
+                                    icon="test-resources/sap/m/images/dronning_victoria.jpg"
+                                    class="sapUiSmallMarginTopBottom"
+                                />
+                                <m:List
+                                    id="idRatingsList"
+                                    showSeparators="Inner"
+                                    items="{ratings}"
+                                >
+                                    <m:FeedListItem
+                                        id="idCommentFeedListItem"
+                                        sender="{createdBy}"
+                                        senderPress="onCommentFeedListItemSenderPress"
+                                        iconPress="onCommentFeedListItemIconPress"
+                                        info="Review"
+                                        timestamp="{createdAt}"
+                                        text="{comment} - {rating}/"
+                                        convertLinksToAnchorTags="All"
+                                    />
+                                </m:List>
+                            </m:VBox>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+        </sections>
     </ObjectPageLayout>
 </mvc:View>

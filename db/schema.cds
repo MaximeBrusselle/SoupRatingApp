@@ -13,7 +13,10 @@ entity Soup : cuid, managed {
     ratings     : Association to many Rating
                       on ratings.soup = $self;
     avgRating   : Double;
-    ingredients : String
+    ratingsCount : Integer;
+    ingredients : String;
+    isVeggie    : Integer;
+    isSpicy     : Integer;
 }
 
 entity Rating : cuid, managed {

@@ -22,8 +22,20 @@ export default class Detail extends BaseController {
 	private _onRouteMatched(oEvent: any): void {
 		const oView = this.getView() as View;
 		const id = oEvent.getParameter("arguments").ID;
-		oView.bindElement(`/Soup(${id})`);
+		oView.bindElement(`/Soup(${id})`, {
+			$expand: "ratings",
+		});
 	}
 
-	public onAverageUserRatingLinkPress(): void {}
+	public onCommentFeedListItemIconPress(oEvent: UI5Event): void {
+		
+	}
+
+	public onCommentFeedListItemSenderPress(oEvent: UI5Event): void {
+		
+	}
+
+	public onFeedInputPost(oEvent: UI5Event): void {
+
+	}
 }

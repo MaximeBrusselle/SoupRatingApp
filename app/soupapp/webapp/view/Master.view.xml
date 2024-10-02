@@ -14,7 +14,7 @@
         <f:GridList
             id="idSoupGridList"
             headerText="A list of all the soups"
-            items="{ path: '/Soup', parameters: {$expand: 'ratings', $select: 'ID,name,shortDescr,date,avgRating', $orderby: 'avgRating,date,name'} }"
+            items="{ path: '/Soup', parameters: {$expand: 'ratings', $select: 'ID,name,shortDescr,date,avgRating', $orderby: 'avgRating desc,date desc,name asc'} }"
             class="sapUiResponsiveContentPadding"
             selectionChange="onSoupGridListSelectionChange"
             mode="SingleSelectMaster"

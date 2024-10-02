@@ -8,4 +8,8 @@ export type ISoup = {
     date: Date
     ratings: IRating[]
     avgRating: number
+    ratingsCount: number
+    ingredients: string
+    isVeggie: number
+    isSpicy: number
 }
