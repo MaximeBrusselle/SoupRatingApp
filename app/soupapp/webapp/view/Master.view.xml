@@ -1,4 +1,4 @@
-<mvc:View
+<mvc:View xmlns:core="sap.ui.core"
     controllerName="soupapp.controller.Master"
     xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true"
@@ -6,66 +6,89 @@
     xmlns:grid="sap.ui.layout.cssgrid"
     xmlns:f="sap.f"
 >
-    >
     <Page
         id="idPage"
-        title="{i18n>title}"
+        title="Overview of soups"
     >
-        <f:GridList
-            id="idSoupGridList"
-            headerText="A list of all the soups"
-            items="{ path: '/Soup', parameters: {$expand: 'ratings', $select: 'ID,name,shortDescr,date,avgRating', $orderby: 'avgRating desc,date desc,name asc'} }"
-            class="sapUiResponsiveContentPadding"
-            selectionChange="onSoupGridListSelectionChange"
-            mode="SingleSelectMaster"
-        >
-            <f:customLayout>
-                <grid:GridBasicLayout
-                    id="idGridBasicLayout"
-                    gridTemplateColumns="repeat(auto-fit, minmax(16rem, 1fr))"
-                    gridGap="0.5rem"
-                />
-            </f:customLayout>
-
-            <f:GridListItem
-                id="idGridListItem"
-                highlight="{= ${avgRating} > 3 ? 'Success' : 'Error'}"
-                type="Active"
+        <headerContent>
+            <Button
+                id="idCreateButton"
+                text="Create"
+                type="Emphasized"
+                tooltip="Create a soup"
+                press="onButtonCreatePress"
+            />
+        </headerContent>
+        <content>
+            <f:GridList
+                id="idSoupGridList"
+                items="{ path: '/Soup', parameters: {$expand: 'ratings', $select: 'ID,name,shortDescr,date,avgRating,isVeggie,isSpicy', $orderby: 'avgRating desc,date desc,name asc'} }"
+                class="sapUiResponsiveContentPadding"
+                selectionChange="onSoupGridListSelectionChange"
+                mode="SingleSelectMaster"
             >
-                <HBox
-                    id="idHBox"
-                    height="100%"
-                    width="100%"
-                    class="sapUiSmallMargin"
-                    fitContainer="true"
+                <f:customLayout>
+                    <grid:GridBasicLayout
+                        id="idGridBasicLayout"
+                        gridTemplateColumns="repeat(auto-fit, minmax(16rem, 1fr))"
+                        gridGap="0.5rem"
+                    />
+                </f:customLayout>
+
+                <f:GridListItem
+                    id="idGridListItem"
+                    highlight="{= ${avgRating} > 3 ? 'Success' : 'Error'}"
+                    type="Active"
                 >
-                    <VBox id="id2VBox">
-                        <Title
-                            id="idNameGliTitle"
-                            text="{name}"
-                            wrapping="true"
-                        />
-                        <Label
-                            id="idDateLabel"
-                            text="{date}"
-                            wrapping="true"
-                        />
-                        <Label
-                            id="idShortDescrGliLabel"
-                            text="{shortDescr}"
-                            wrapping="true"
-                        />
-                        <RatingIndicator
-                            id="idAvgRatingGliRatingIndicator"
-                            class="sapUiSmallMarginBottom"
-                            value="{avgRating}"
-                            tooltip="Rating Tooltip"
-                            displayOnly="true"
-                            iconSize="22px"
-                        />
-                    </VBox>
-                </HBox>
-            </f:GridListItem>
-        </f:GridList>
+                    <HBox
+                        id="idHBox"
+                        height="100%"
+                        width="100%"
+                        class="sapUiSmallMargin"
+                        fitContainer="true"
+                    >
+                        <VBox id="id2VBox">
+                            <HBox id="idTitleHBox">
+                                <Title
+                                    id="idNameGliTitle"
+                                    text="{name}"
+                                    wrapping="true"
+                                />
+                                <ObjectStatus
+                                    id="idStatusVeggieObjectStatus"
+                                    class="sapUiTinyMarginBegin"
+                                    icon="sap-icon://e-care"
+                                    state="{= ${isVeggie} > 0 ? 'Success' : 'Error'}"
+                                />
+                                <ObjectStatus
+                                    id="idStatusSpicyObjectStatus"
+                                    icon="sap-icon://temperature"
+                                    state="{= ${isSpicy} > 0 ? 'Success' : 'Error'}"
+                                />
+                            </HBox>
+
+                            <Label
+                                id="idDateLabel"
+                                text="{date}"
+                                wrapping="true"
+                            />
+                            <Label
+                                id="idShortDescrGliLabel"
+                                text="{shortDescr}"
+                                wrapping="true"
+                            />
+                            <RatingIndicator
+                                id="idAvgRatingGliRatingIndicator"
+                                class="sapUiSmallMarginBottom"
+                                value="{avgRating}"
+                                tooltip="Rating Tooltip"
+                                displayOnly="true"
+                                iconSize="22px"
+                            />
+                        </VBox>
+                    </HBox>
+                </f:GridListItem>
+            </f:GridList>
+        </content>
     </Page>
 </mvc:View>

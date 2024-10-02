@@ -91,10 +91,10 @@
       },
       "routes": [
         {
-          "name": "RouteMaster",
+          "name": "Master",
           "pattern": "",
           "target": [
-            "TargetMaster"
+            "Master"
           ]
         },
         {
@@ -103,10 +103,17 @@
           "target": [
             "Detail"
           ]
+        },
+        {
+          "name": "CreateSoup",
+          "pattern": "create",
+          "target": [
+            "CreateSoup"
+          ]
         }
       ],
       "targets": {
-        "TargetMaster": {
+        "Master": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": false,
@@ -119,6 +126,13 @@
           "clearControlAggregation": false,
           "viewId": "Detail",
           "viewName": "Detail"
+        },
+        "CreateSoup": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "CreateSoup",
+          "viewName": "CreateSoup"
         }
       }
     },

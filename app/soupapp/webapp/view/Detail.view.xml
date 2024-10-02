@@ -282,11 +282,9 @@
                                     <m:FeedListItem
                                         id="idCommentFeedListItem"
                                         sender="{createdBy}"
-                                        senderPress="onCommentFeedListItemSenderPress"
-                                        iconPress="onCommentFeedListItemIconPress"
                                         info="Review"
                                         timestamp="{createdAt}"
-                                        text="{comment} - {rating}/"
+                                        text="{comment} - {rating}/5"
                                         convertLinksToAnchorTags="All"
                                     />
                                 </m:List>
