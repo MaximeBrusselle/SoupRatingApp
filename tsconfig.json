@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {
-        "target": "es6",
-        "module": "commonjs",
-        "outDir": "./gen/srv",
-        "rootDir": "./",
-        "baseUrl": "./",
-        "moduleResolution": "node",
-        "skipLibCheck": true,
-        "preserveConstEnums": true,
-        "sourceMap": true,
-        "allowJs": true,
-        "strict": true,
-        "strictNullChecks": false,
-        "strictPropertyInitialization": false,
-        "esModuleInterop": true
-    },
-    "include": [
-        "./srv/**/*"
-    ]
+	"compilerOptions": {
+		"target": "es6",
+		"module": "commonjs",
+		"outDir": "./gen/srv",
+		"rootDir": "./",
+		"baseUrl": "./",
+		"moduleResolution": "node",
+		"skipLibCheck": true,
+		"preserveConstEnums": true,
+		"sourceMap": true,
+		"allowJs": true,
+		"strict": true,
+		"strictNullChecks": false,
+		"strictPropertyInitialization": false,
+		"esModuleInterop": true
+	},
+	"include": ["./srv/**/*"],
+
+	"exclude": ["node_modules"]
 }

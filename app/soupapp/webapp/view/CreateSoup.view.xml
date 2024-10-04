@@ -3,37 +3,34 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:f="sap.ui.layout.form"
-    xmlns:l="sap.ui.layout"
-    xmlns:grid="sap.ui.layout.cssgrid"
     xmlns:core="sap.ui.core"
     displayBlock="true"
     height="100%"
     busyIndicatorDelay="0"
 >
     <Page
-        id="page"
-        showHeader="true"
+        id="idCreatePage"
         title="Create Soup"
     >
         <customHeader>
-            <Bar id="bar">
+            <Bar id="idBar">
                 <contentLeft>
                     <Title
-                        id="text"
+                        id="idCreateSoupTitle"
                         text="Create Soup"
                     />
                 </contentLeft>
                 <contentRight>
                     <Button
-                        id="save"
+                        id="idSaveButton"
                         text="Save"
                         type="Emphasized"
-                        press="handleSavePress"
+                        press="onSaveButtonPress"
                     />
                     <Button
-                        id="cancel"
+                        id="idCancelButton"
                         text="Cancel"
-                        press="handleCancelPress"
+                        press="onCancelButtonPress"
                     />
                 </contentRight>
             </Bar>
@@ -45,90 +42,82 @@
                 fitContainer="true"
             >
                 <f:SimpleForm
-                    id="SimpleFormChange480_12120"
+                    id="idSimpleForm"
                     editable="true"
                     layout="ResponsiveGridLayout"
                     title="Basic Data"
                     labelSpanXL="4"
-                    labelSpanL="4"
                     labelSpanM="12"
-                    labelSpanS="12"
                     adjustLabelSpan="false"
                     emptySpanXL="0"
-                    emptySpanL="0"
-                    emptySpanM="0"
-                    emptySpanS="0"
                     columnsXL="2"
-                    columnsL="2"
-                    columnsM="1"
                     singleContainerFullSize="false"
                 >
                     <f:content>
                         <core:Title
-                            id="idTitle"
+                            id="idGeneralTitle"
                             text="General"
                         />
                         <Label
-                            id="idLabel"
+                            id="idNameLabel"
                             text="Name"
                         />
                         <Input
-                            id="idInput"
-                            value="{/create>name}"
+                            id="idNameInput"
+                            value="{path: 'create>/name', type: 'sap.ui.model.type.String'}"
                             required="true"
                         />
                         <Label
-                            id="id2Label"
+                            id="idShortDescriptionLabel"
                             text="Short description"
                         />
                         <Input
-                            id="id2Input"
-                            value="{/create>shortDescr}"
+                            id="idShortDescrInput"
+                            value="{path: 'create>/shortDescr', type: 'sap.ui.model.type.String'}"
                             required="true"
                         />
                         <Label
-                            id="id4Label"
+                            id="idLongDescriptionLabel"
                             text="Long Description"
                         />
                         <TextArea
-                            id="id4Input"
-                            value="{/create>longDescr}"
+                            id="idLongDescrTextArea"
+                            value="{path: 'create>/longDescr', type: 'sap.ui.model.type.String'}"
                             required="true"
                         />
                         <Label
-                            id="id3Label"
+                            id="idDateServed2Label"
                             text="Date Served"
                         />
                         <Input
-                            id="id3Input"
-                            value="{/create>date}"
+                            id="idDateInput"
+                            value="{path: 'create>/date', type: 'sap.ui.model.type.Date'}"
                             required="true"
                             type="Date"
                         />
                         <core:Title
-                            id="idTitle2"
+                            id="idCharacteristicsTitle"
                             text="Characteristics"
                         />
                         <Label
-                            id="id5Label"
+                            id="idVeggie2Label"
                             text="Veggie"
                         />
                         <CheckBox
-                            id="id5Input"
-                            selected="{/create>isVeggie}"
+                            id="idCheckBox"
+                            selected="{path: 'create>/isVeggie', type: 'sap.ui.model.type.Boolean'}"
                         />
                         <Label
-                            id="id6Label"
+                            id="idSpicy2Label"
                             text="Spicy"
                         />
                         <CheckBox
-                            id="id6Input"
-                            selected="{/create>isSpicy}"
+                            id="id2CheckBox"
+                            selected="{path: 'create>/isSpicy', type: 'sap.ui.model.type.Boolean'}"
                         />
                     </f:content>
                 </f:SimpleForm>
             </VBox>
         </content>
-
     </Page>
 </mvc:View>

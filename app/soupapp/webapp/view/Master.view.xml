@@ -1,4 +1,4 @@
-<mvc:View xmlns:core="sap.ui.core"
+<mvc:View
     controllerName="soupapp.controller.Master"
     xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true"
@@ -16,7 +16,7 @@
                 text="Create"
                 type="Emphasized"
                 tooltip="Create a soup"
-                press="onButtonCreatePress"
+                press="onCreateButtonPress"
             />
         </headerContent>
         <content>

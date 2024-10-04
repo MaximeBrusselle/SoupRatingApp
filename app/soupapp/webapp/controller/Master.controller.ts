@@ -1,12 +1,9 @@
-import Formatter from "soupapp/model/formatter";
 import BaseController from "./BaseController";
 
 /**
  * @namespace soupapp.controller
  */
 export default class Master extends BaseController {
-	formatter = Formatter;
-
 	/*eslint-disable @typescript-eslint/no-empty-function*/
 	public onInit(): void {}
 
@@ -27,7 +24,7 @@ export default class Master extends BaseController {
 		});
 	}
 
-	public onButtonCreatePress(): void {
+	public onCreateButtonPress(): void {
 		this.getRouter().navTo("CreateSoup");
 	}
 }
