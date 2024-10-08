@@ -277,7 +277,10 @@
                                 <m:List
                                     id="idRatingsList"
                                     showSeparators="Inner"
-                                    items="{ratings}"
+                                    items="{
+                                        path: 'ratings',
+                                        parameters: {$orderby: 'createdAt desc'}
+                                    }"
                                 >
                                     <m:FeedListItem
                                         id="idCommentFeedListItem"

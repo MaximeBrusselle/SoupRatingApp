@@ -45,6 +45,7 @@ export default class CreateSoup extends BaseController {
                 
 			},
 			function (oError: any) {
+				console.log("🚀 ~ CreateSoup ~ onSaveButtonPress ~ oError:", oError)
 				if (!oError.canceled) {
 					throw oError; // unexpected error
 				}

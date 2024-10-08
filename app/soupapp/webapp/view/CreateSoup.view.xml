@@ -64,7 +64,10 @@
                         />
                         <Input
                             id="idNameInput"
-                            value="{path: 'create>/name', type: 'sap.ui.model.type.String'}"
+                            value="{
+                                path: 'create>/name',
+                                type: 'sap.ui.model.type.String'
+                            }"
                             required="true"
                         />
                         <Label
@@ -73,7 +76,10 @@
                         />
                         <Input
                             id="idShortDescrInput"
-                            value="{path: 'create>/shortDescr', type: 'sap.ui.model.type.String'}"
+                            value="{
+                                path: 'create>/shortDescr',
+                                type: 'sap.ui.model.type.String'
+                            }"
                             required="true"
                         />
                         <Label
@@ -82,18 +88,26 @@
                         />
                         <TextArea
                             id="idLongDescrTextArea"
-                            value="{path: 'create>/longDescr', type: 'sap.ui.model.type.String'}"
+                            value="{
+                                path: 'create>/longDescr',
+                                type: 'sap.ui.model.type.String'
+                            }"
                             required="true"
                         />
                         <Label
                             id="idDateServed2Label"
                             text="Date Served"
                         />
-                        <Input
-                            id="idDateInput"
-                            value="{path: 'create>/date', type: 'sap.ui.model.type.Date'}"
-                            required="true"
-                            type="Date"
+                        <DatePicker
+                            id="idDateDatePicker"
+                            value="{
+                                path: 'create>/date',
+                                type: 'sap.ui.model.type.Date',
+                                formatOptions: {
+                                    pattern: 'yyyy-MM-dd'
+                                }
+                            }"
+                            class="sapUiSmallMarginBottom"
                         />
                         <core:Title
                             id="idCharacteristicsTitle"
@@ -105,7 +119,10 @@
                         />
                         <CheckBox
                             id="idCheckBox"
-                            selected="{path: 'create>/isVeggie', type: 'sap.ui.model.type.Boolean'}"
+                            selected="{
+                                path: 'create>/isVeggie',
+                                type: 'sap.ui.model.type.Boolean'
+                            }"
                         />
                         <Label
                             id="idSpicy2Label"
@@ -113,7 +130,10 @@
                         />
                         <CheckBox
                             id="id2CheckBox"
-                            selected="{path: 'create>/isSpicy', type: 'sap.ui.model.type.Boolean'}"
+                            selected="{
+                                path: 'create>/isSpicy',
+                                type: 'sap.ui.model.type.Boolean'
+                            }"
                         />
                     </f:content>
                 </f:SimpleForm>
