@@ -1,8 +1,7 @@
-import UI5Event from "sap/ui/base/Event";
 import BaseController from "./BaseController";
 import View from "sap/ui/core/mvc/View";
-import ODataContextBinding from "sap/ui/model/odata/v4/ODataContextBinding";
 import ODataListBinding from "sap/ui/model/odata/v2/ODataListBinding";
+import Event from "sap/ui/base/Event";
 
 /**
  * @namespace soupapp.controller
