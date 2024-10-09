@@ -217,7 +217,7 @@
                     <m:Text
                         id="idLongDescrText"
                         width="320px"
-                        text="{longDescr}"
+                        text="{= ${longDescr} || 'No Description Provided'}"
                     />
                 </m:VBox>
 
@@ -282,6 +282,7 @@
                                         path: 'ratings',
                                         parameters: {$orderby: 'createdAt desc'}
                                     }"
+                                    noDataText="No Ratings Yet"
                                 >
                                     <m:FeedListItem
                                         id="idCommentFeedListItem"
