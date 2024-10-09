@@ -1,7 +1,7 @@
 import BaseController from "./BaseController";
 import View from "sap/ui/core/mvc/View";
 import ODataListBinding from "sap/ui/model/odata/v2/ODataListBinding";
-import Event from "sap/ui/base/Event";
+import MessageBox from "sap/m/MessageBox";
 
 /**
  * @namespace soupapp.controller
@@ -55,7 +55,38 @@ export default class Detail extends BaseController {
 				that._oView.getElementBinding()?.getModel()?.refresh();
 			},
 			function failure(oError: any) {
-				console.log("🚀 ~ CreateRating ~ onFeedInputPost ~ Failure ~ oError:", oError);
+				console.error("🚀 ~ CreateRating ~ onFeedInputPost ~ Failure ~ oError:", oError);
+				if (!oError.canceled) {
+					throw oError; // unexpected error
+				}
+			}
+		);
+	}
+
+	/**
+	 * Called when the user clicks on the delete button.
+	 * Deletes the currently selected soup from the database.
+	 * @param {sap.ui.base.Event} oEvent the button press event
+	 * @public
+	 */
+	public onDeleteButtonPress(oEvent: any): void {
+		const oBinding = this._oView?.getBindingContext() as any;
+		const that = this;
+
+		oBinding?.delete().then(
+			function success() {
+				console.log("🚀 ~ Detail ~ onDeleteButtonPress ~ success");
+				MessageBox.success(`Soup ${that._soupId} deleted`, {
+					title: "Soup successfully deleted",
+					onClose: function () {
+						that.getRouter().navTo("Master");
+						that.getView()?.getModel()?.refresh();
+					},
+				});
+			}.bind(this),
+			function failure(oError: any) {
+				console.error("🚀 ~ Detail ~ onDeleteButtonPress ~ failure ~ oError:", oError);
+				MessageBox.error(`Could not delete soup ${that._soupId}: ${oError.message}`);
 				if (!oError.canceled) {
 					throw oError; // unexpected error
 				}

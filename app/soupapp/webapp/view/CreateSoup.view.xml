@@ -137,6 +137,29 @@
                         />
                     </f:content>
                 </f:SimpleForm>
+                <f:SimpleForm
+                    id="id2SimpleForm"
+                    editable="true"
+                    layout="ResponsiveGridLayout"
+                    title="Ingredients"
+                >
+                    <f:content>
+                        <Label
+                            id="idIngredientsLabel"
+                            text="Ingredients"
+                            tooltip="Enter ingredients separated by comma"
+                        />
+                        <TextArea
+                            id="idIngredientsTextArea"
+                            value="{
+                                path: 'create>/ingredients',
+                                type: 'sap.ui.model.type.String'
+                            }"
+                            required="true"
+                            tooltip="Enter ingredients separated by comma"
+                        />
+                    </f:content>
+                </f:SimpleForm>
             </VBox>
         </content>
     </Page>

@@ -59,6 +59,7 @@
                     <m:Button
                         id="idDeleteButton"
                         text="Delete"
+                        press="onDeleteButtonPress"
                     />
                     <m:Button
                         id="idCopyButton"

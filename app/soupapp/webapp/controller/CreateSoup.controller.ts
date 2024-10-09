@@ -29,7 +29,7 @@ export default class CreateSoup extends BaseController {
 			name: oData.name,
 			shortDescr: oData.shortDescr,
 			longDescr: oData.longDescr,
-			ingredients: oData.ingredients || "",
+			ingredients: oData.ingredients,
 			date: oData.date.toISOString().slice(0, 10),
 			isVeggie: oData.isVeggie,
 			isSpicy: oData.isSpicy,
