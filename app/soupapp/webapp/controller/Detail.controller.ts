@@ -35,7 +35,7 @@ export default class Detail extends BaseController {
 	public onFeedInputPost(oEvent: any): void {
 		const comment = oEvent.getParameter("value");
 		// const score = oEvent.getParameter("score");
-		const score = 0;
+		const score = 3;
 
 		const newData = {
 			soup_ID: this._soupId,
@@ -52,7 +52,7 @@ export default class Detail extends BaseController {
 			function success() {
 				console.log("🚀 ~ CreateRating ~ onFeedInputPost ~ Success ~ oContext:", oContext);
 				oEvent.getSource().setValue("");
-				that._oView.getBinding("items")?.refresh();
+				that._oView.getElementBinding()?.getModel()?.refresh();
 			},
 			function failure(oError: any) {
 				console.log("🚀 ~ CreateRating ~ onFeedInputPost ~ Failure ~ oError:", oError);
