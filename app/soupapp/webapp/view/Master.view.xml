@@ -5,90 +5,201 @@
     xmlns="sap.m"
     xmlns:grid="sap.ui.layout.cssgrid"
     xmlns:f="sap.f"
+    xmlns:layout="sap.ui.layout"
 >
-    <Page
-        id="idPage"
-        title="Overview of soups"
+    <f:DynamicPage
+        id="idDynamicPage"
+        stickySubheaderProvider="idIconTabBar"
+        class="sapUiNoContentPadding"
     >
-        <headerContent>
-            <Button
-                id="idCreateButton"
-                text="Create"
-                type="Emphasized"
-                tooltip="Create a soup"
-                press="onCreateButtonPress"
-            />
-        </headerContent>
-        <content>
-            <f:GridList
-                id="idSoupGridList"
-                items="{ path: '/Soup', parameters: {$expand: 'ratings', $select: 'ID,name,shortDescr,date,avgRating,isVeggie,isSpicy', $orderby: 'avgRating desc,date desc,name asc'} }"
-                class="sapUiResponsiveContentPadding"
-                selectionChange="onSoupGridListSelectionChange"
-                mode="SingleSelectMaster"
-            >
-                <f:customLayout>
-                    <grid:GridBasicLayout
-                        id="idGridBasicLayout"
-                        gridTemplateColumns="repeat(auto-fit, minmax(16rem, 1fr))"
-                        gridGap="0.5rem"
+        <!-- DynamicPage Title -->
+        <f:title>
+            <f:DynamicPageTitle id="idDynamicPageTitle">
+                <f:heading>
+                    <Title
+                        id="idOverviewOfSoupsTitle"
+                        text="Overview of soups"
                     />
-                </f:customLayout>
-
-                <f:GridListItem
-                    id="idGridListItem"
-                    highlight="{= ${avgRating} > 3 ? 'Success' : 'Error'}"
-                    type="Active"
+                </f:heading>
+                <f:expandedContent>
+                    <Label
+                        id="idTodayLabel"
+                        text="Today: {masterInfo>/currDay}"
+                    />
+                </f:expandedContent>
+                <f:snappedContent>
+                    <Label
+                        id="idTodaySnappedLabel"
+                        text="Today: {masterInfo>/currDay}"
+                    />
+                </f:snappedContent>
+                <f:snappedTitleOnMobile>
+                    <Title
+                        id="idTodayMobileTitle"
+                        text="Today: {masterInfo>/currDay}"
+                    />
+                </f:snappedTitleOnMobile>
+                <f:actions>
+                    <Button
+                        id="idCreateButton"
+                        text="Create"
+                        type="Emphasized"
+                        tooltip="Create a soup"
+                        press="onCreateButtonPress"
+                    />
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <!-- DynamicPage Header -->
+        <f:header>
+            <f:DynamicPageHeader id="idDynamicPageHeader">
+                <layout:HorizontalLayout
+                    allowWrapping="true"
+                    id="idHorizontalLayout"
                 >
-                    <HBox
-                        id="idHBox"
-                        height="100%"
-                        width="100%"
-                        class="sapUiSmallMargin"
-                        fitContainer="true"
+                    <layout:VerticalLayout
+                        class="sapUiMediumMarginEnd"
+                        id="idVerticalLayout"
                     >
-                        <VBox id="id2VBox">
-                            <HBox id="idTitleHBox">
-                                <Title
-                                    id="idNameGliTitle"
-                                    text="{name}"
-                                    wrapping="true"
-                                />
-                                <ObjectStatus
-                                    id="idStatusVeggieObjectStatus"
-                                    class="sapUiTinyMarginBegin"
-                                    icon="sap-icon://e-care"
-                                    state="{= ${isVeggie} > 0 ? 'Success' : 'Error'}"
-                                />
-                                <ObjectStatus
-                                    id="idStatusSpicyObjectStatus"
-                                    icon="sap-icon://temperature"
-                                    state="{= ${isSpicy} > 0 ? 'Success' : 'Error'}"
-                                />
-                            </HBox>
+                        <ObjectAttribute
+                            id="idFirstDayObjectAttribute"
+                            title="First day of the week"
+                            text="{masterInfo>/firstDay}"
+                        />
+                        <ObjectAttribute
+                            id="idLastDayObjectAttribute"
+                            title="Last day of the week"
+                            text="{masterInfo>/lastDay}"
+                        />
+                    </layout:VerticalLayout>
 
-                            <Label
-                                id="idDateLabel"
-                                text="{date}"
-                                wrapping="true"
-                            />
-                            <Label
-                                id="idShortDescrGliLabel"
-                                text="{shortDescr}"
-                                wrapping="true"
-                            />
-                            <RatingIndicator
-                                id="idAvgRatingGliRatingIndicator"
-                                class="sapUiSmallMarginBottom"
-                                value="{avgRating}"
-                                tooltip="Rating Tooltip"
-                                displayOnly="true"
-                                iconSize="22px"
-                            />
-                        </VBox>
-                    </HBox>
-                </f:GridListItem>
-            </f:GridList>
-        </content>
-    </Page>
+                    <layout:VerticalLayout id="id2VerticalLayout">
+                        <ObjectAttribute
+                            title="Soup this week"
+                            id="idSoupsThisWeekObjectAttribute"
+                        />
+                        <ObjectStatus
+                            id="idYesNoObjectStatus"
+                            text="{= 3 > 0 ? 'Yes' : 'No'}"
+                            state="{= 3 > 0 ? 'Success' : 'Error'}"
+                        />
+                    </layout:VerticalLayout>
+                </layout:HorizontalLayout>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <IconTabBar
+                id="idIconTabBar"
+                class="sapUiResponsiveContentPadding"
+            >
+                <items>
+                    <IconTabFilter
+                        id="idAllSoupsIconTabFilter"
+                        text="All Soups"
+                        icon="sap-icon://home"
+                    >
+                        <f:GridList
+                            id="idSoupGridList"
+                            items="{ 
+                                path: '/Soup', 
+                                parameters: {
+                                    $expand: 'ratings', 
+                                    $select: 'ID,name,shortDescr,date,avgRating,isVeggie,isSpicy', 
+                                    $orderby: 'date desc,name asc'
+                                } 
+                            }"
+                            class="sapUiResponsiveContentPadding"
+                            selectionChange="onGridListSelectionChange"
+                            mode="SingleSelectMaster"
+                        >
+                            <f:customLayout>
+                                <grid:GridBasicLayout
+                                    id="idGridBasicLayout"
+                                    gridTemplateColumns="repeat(auto-fit, minmax(16rem, 1fr))"
+                                    gridGap="0.5rem"
+                                />
+                            </f:customLayout>
+
+                            <f:GridListItem
+                                id="idGridListItem"
+                                highlight="{= ${avgRating} > 3 ? 'Success' : 'Error'}"
+                                type="Active"
+                            >
+                                <HBox
+                                    id="idHBox"
+                                    height="100%"
+                                    width="100%"
+                                    class="sapUiSmallMargin"
+                                    fitContainer="true"
+                                >
+                                    <VBox id="id2VBox">
+                                        <HBox id="idTitleHBox">
+                                            <Title
+                                                id="idNameGliTitle"
+                                                text="{name}"
+                                                wrapping="true"
+                                            />
+                                            <ObjectStatus
+                                                id="idStatusVeggieObjectStatus"
+                                                class="sapUiTinyMarginBegin"
+                                                icon="sap-icon://e-care"
+                                                state="{= ${isVeggie} > 0 ? 'Success' : 'Error'}"
+                                            />
+                                            <ObjectStatus
+                                                id="idStatusSpicyObjectStatus"
+                                                icon="sap-icon://temperature"
+                                                state="{= ${isSpicy} > 0 ? 'Success' : 'Error'}"
+                                            />
+                                        </HBox>
+
+                                        <Label
+                                            id="idDateLabel"
+                                            text="{date}"
+                                            wrapping="true"
+                                        />
+                                        <Label
+                                            id="idShortDescrGliLabel"
+                                            text="{shortDescr}"
+                                            wrapping="true"
+                                        />
+                                        <RatingIndicator
+                                            id="idAvgRatingGliRatingIndicator"
+                                            class="sapUiSmallMarginBottom"
+                                            value="{avgRating}"
+                                            tooltip="Rating Tooltip"
+                                            displayOnly="true"
+                                            iconSize="22px"
+                                        />
+                                    </VBox>
+                                </HBox>
+                            </f:GridListItem>
+                        </f:GridList>
+                    </IconTabFilter>
+                    <IconTabFilter
+                        id="idThisWeekIconTabFilter"
+                        text="This week"
+                        icon="sap-icon://competitor"
+                        iconColor="Positive"
+                    >
+                        <f:GridList
+                            id="idSoup2GridList"
+                            noDataText="No soups yet this week - Add some!"
+                            class="sapUiResponsiveContentPadding"
+                            selectionChange="onGridListSelectionChange"
+                            mode="SingleSelectMaster"
+                        >
+                            <f:customLayout>
+                                <grid:GridBasicLayout
+                                    id="id2GridBasicLayout"
+                                    gridTemplateColumns="repeat(auto-fit, minmax(16rem, 1fr))"
+                                    gridGap="0.5rem"
+                                />
+                            </f:customLayout>
+                        </f:GridList>
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+        </f:content>
+        <!-- DynamicPage Footer -->
+    </f:DynamicPage>
 </mvc:View>
