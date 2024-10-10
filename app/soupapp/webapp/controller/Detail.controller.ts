@@ -2,6 +2,7 @@ import BaseController from "./BaseController";
 import View from "sap/ui/core/mvc/View";
 import ODataListBinding from "sap/ui/model/odata/v2/ODataListBinding";
 import MessageBox from "sap/m/MessageBox";
+import Context from "sap/ui/model/Context";
 
 /**
  * @namespace soupapp.controller
@@ -92,5 +93,48 @@ export default class Detail extends BaseController {
 				}
 			}
 		);
+	}
+
+	/**
+	 * Copies the currently selected soup to the clipboard as a JSON string.
+	 * The resulting JSON object will have the following properties:
+	 * - ID: string
+	 * - name: string
+	 * - shortDescr: string
+	 * - longDescr: string
+	 * - ingredients: string
+	 * - date: Date
+	 * - isVeggie: boolean
+	 * - isSpicy: boolean
+	 * - ratingsCount: number
+	 * - avgRating: number
+	 * - ratings: { rating: number, comment: string }[]
+	 * @public
+	 */
+	public onCopyButtonPress(): void {
+		type RatingsListItem = {
+			rating: number;
+			comment: string;
+		};
+
+		const oBindingContext = this._oView.getBindingContext() as Context;
+		const data = {
+			ID: oBindingContext.getProperty("ID"),
+			name: oBindingContext.getProperty("name"),
+			shortDescr: oBindingContext.getProperty("shortDescr"),
+			longDescr: oBindingContext.getProperty("longDescr"),
+			ingredients: oBindingContext.getProperty("ingredients"),
+			date: oBindingContext.getProperty("date"),
+			isVeggie: oBindingContext.getProperty("isVeggie"),
+			isSpicy: oBindingContext.getProperty("isSpicy"),
+			ratingsCount: oBindingContext.getProperty("ratingsCount"),
+			avgRating: oBindingContext.getProperty("avgRating"),
+			ratings: Array.from({ length: oBindingContext.getProperty("ratingsCount") }, (_, i) => ({
+				comment: oBindingContext.getProperty(`ratings/${i}/comment`),
+				rating: oBindingContext.getProperty(`ratings/${i}/rating`),
+			})) as RatingsListItem[],
+		};
+		console.log("🚀 ~ Detail ~ onCopyButtonPress ~ data:", JSON.stringify(data));
+		window.navigator.clipboard.writeText(JSON.stringify(data));
 	}
 }

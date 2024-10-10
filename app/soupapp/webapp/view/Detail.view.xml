@@ -64,6 +64,7 @@
                     <m:Button
                         id="idCopyButton"
                         text="Copy"
+                        press="onCopyButtonPress"
                     />
                     <m:OverflowToolbarButton
                         id="idShareOverflowToolbarButton"
