@@ -290,7 +290,7 @@
                                         sender="{createdBy}"
                                         info="Review"
                                         timestamp="{createdAt}"
-                                        text="{comment} - {rating}/5"
+                                        text="{parts: [{path: 'comment'}, {path: 'rating'}], formatter: '.ratingTextFormatter'}"
                                         convertLinksToAnchorTags="All"
                                     />
                                 </m:List>

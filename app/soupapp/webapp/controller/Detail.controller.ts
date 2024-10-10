@@ -70,7 +70,7 @@ export default class Detail extends BaseController {
 	 * @param {sap.ui.base.Event} oEvent the button press event
 	 * @public
 	 */
-	public onDeleteButtonPress(oEvent: any): void {
+	public onDeleteButtonPress(_: any): void {
 		const oBinding = this._oView?.getBindingContext() as any;
 		const that = this;
 
@@ -136,5 +136,17 @@ export default class Detail extends BaseController {
 		};
 		console.log("🚀 ~ Detail ~ onCopyButtonPress ~ data:", JSON.stringify(data));
 		window.navigator.clipboard.writeText(JSON.stringify(data));
+	}
+
+	/**
+	 * A formatter for rating text that takes a comment and a rating and outputs a string
+	 * with the comment followed by a number of stars equal to the rating.
+	 * @param {string} comment - The comment part of the rating text.
+	 * @param {number} rating - The rating part of the rating text, 1-5.
+	 * @returns {string} The formatted rating text.
+	 * @private
+	 */
+	private ratingTextFormatter(comment: string, rating: number): string {
+		return `${comment} - ${"⭐".repeat(rating)}`;
 	}
 }
