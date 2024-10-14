@@ -330,6 +330,8 @@
                                     post="onFeedInputPost"
                                     icon="test-resources/sap/m/images/dronning_victoria.jpg"
                                     class="sapUiSmallMarginTopBottom"
+                                    maxLength="111"
+                                    showExceededText="true"
                                 />
                                 <m:List
                                     id="idRatingsList"

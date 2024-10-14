@@ -214,6 +214,7 @@
                                         />
                                         <Input
                                             value="{create>quantity}"
+                                            type="Number"
                                             id="idQuantityInput"
                                         />
                                         <Input
