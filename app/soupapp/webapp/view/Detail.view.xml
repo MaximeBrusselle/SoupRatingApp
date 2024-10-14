@@ -252,10 +252,65 @@
                 <subSections>
                     <ObjectPageSubSection id="idObjectPageSubSection">
                         <blocks>
-                            <m:Text
-                                id="idIngredientsText"
-                                text="{ingredients}"
-                            />
+                            <m:Table
+                                id="idIngredientsDetailTable"
+                                items="{ingredients}"
+                            >
+                                <m:columns>
+                                    <m:Column
+                                        minScreenWidth="Tablet"
+                                        demandPopin="true"
+                                        id="idNameColumn"
+                                    >
+                                        <m:Text
+                                            text="Name"
+                                            id="idNameText"
+                                        />
+                                    </m:Column>
+                                    <m:Column
+                                        minScreenWidth="Tablet"
+                                        demandPopin="true"
+                                        id="idQuantityColumn"
+                                    >
+                                        <m:Text
+                                            text="Quantity"
+                                            id="idQuantityText"
+                                        />
+                                    </m:Column>
+                                    <m:Column
+                                        minScreenWidth="Tablet"
+                                        demandPopin="true"
+                                        id="idUOMColumn"
+                                    >
+                                        <m:Text
+                                            text="UOM"
+                                            id="idUOMText"
+                                        />
+                                    </m:Column>
+                                </m:columns>
+
+                                <m:items>
+                                    <m:ColumnListItem
+                                        vAlign="Middle"
+                                        id="id2ColumnListItem"
+                                    >
+                                        <m:cells>
+                                            <m:Text
+                                                text="{name}"
+                                                id="idName2Text"
+                                            />
+                                            <m:Text
+                                                text="{quantity}"
+                                                id="idQuantity2Text"
+                                            />
+                                            <m:Text
+                                                text="{uom}"
+                                                id="idUomText"
+                                            />
+                                        </m:cells>
+                                    </m:ColumnListItem>
+                                </m:items>
+                            </m:Table>
                         </blocks>
                     </ObjectPageSubSection>
                 </subSections>

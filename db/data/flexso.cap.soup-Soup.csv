@@ -1,4 +1,4 @@
-ID,name,shortDescr,longDescr,date,isVeggie,isSpicy,ingredients
-a43675ee-79af-44eb-826e-000000000000,Tomatensoep,lol,lolllllllllll,2024-09-24,0,0,"1 ui, 2 tenen knoflook, 750g tomaten, 750ml water, 1 groentebouillontablet, 1 klein blikje tomatenpuree, scheutje kokroom, 2 eetlepels olijfolie"
-a43675ee-79af-44eb-826e-000000000001,Kippensoep,lol,lolllllllllll,2024-09-23,1,0,"200g kip, 1 eetlepel boter, 1 ui, 1 theelepel kerriepoeder, 2 kippen bouillonblokjes, 150g fijne soepgroenten, 1L water, 80g wortel, 40g vermicelli, 1 blaadje laurier"
-a43675ee-79af-44eb-826e-000000000002,Erwtensoep,lol,lolllllllllll,2024-09-22,1,1,"500g spliterwten, 1 prei, 2L water, 2 runderbouillonblokjes, 250g knolselderij, 1 winterpeen, 1 aardappel, 1 rookworst, 300g schouder karbonade, 1 laurierblaadje, paar takjes selderij, 1 ui"
+ID,name,shortDescr,longDescr,date,isVeggie,isSpicy
+a43675ee-79af-44eb-826e-000000000000,Tomatensoep,lol,lolllllllllll,2024-09-24,0,0
+a43675ee-79af-44eb-826e-000000000001,Kippensoep,lol,lolllllllllll,2024-09-23,1,0
+a43675ee-79af-44eb-826e-000000000002,Erwtensoep,lol,lolllllllllll,2024-09-22,1,0

@@ -141,25 +141,107 @@
                     editable="true"
                     layout="ResponsiveGridLayout"
                     title="Ingredients"
+                    class="sapUiSmallMarginTop"
                 >
                     <f:content>
-                        <Label
-                            id="idIngredientsLabel"
-                            text="Ingredients"
-                            tooltip="Enter ingredients separated by comma"
-                        />
-                        <TextArea
-                            id="idIngredientsTextArea"
-                            value="{
-                                path: 'create>/ingredients',
-                                type: 'sap.ui.model.type.String'
-                            }"
-                            required="true"
-                            tooltip="Enter ingredients separated by comma"
-                        />
+                        <Table
+                            id="idIngredientsTable"
+                            mode="MultiSelect"
+                            items="{create>/ingredients}"
+                        >
+                            <headerToolbar>
+                                <OverflowToolbar id="id2OverflowToolbar">
+                                    <ToolbarSpacer id="id2ToolbarSpacer" />
+                                    <Button
+                                        id="idAddRowButton"
+                                        text="Add Row"
+                                        type="Emphasized"
+                                        press="onAddRowButtonPress"
+                                    />
+                                    <Button
+                                        id="idDeleteSelectedRowsButton"
+                                        text="Delete selected rows"
+                                        type="Reject"
+                                        press="onDeleteSelectedRowsButtonPress"
+                                    />
+                                </OverflowToolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true"
+                                    id="idColumn"
+                                >
+                                    <Label
+                                        text="Ingredient name"
+                                        id="idIngredientNameLabel"
+                                        required="true"
+                                    />
+                                </Column>
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true"
+                                    id="id2Column"
+                                >
+                                    <Label
+                                        text="Quantity"
+                                        id="idQuantityLabel"
+                                        required="true"
+                                    />
+                                </Column>
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true"
+                                    id="id3Column"
+                                >
+                                    <Label
+                                        text="UOM"
+                                        id="idUOMLabel"
+                                        required="true"
+                                    />
+                                </Column>
+                            </columns>
+
+                            <items>
+                                <ColumnListItem
+                                    vAlign="Middle"
+                                    id="idColumnListItem"
+                                >
+                                    <cells>
+                                        <Input
+                                            value="{create>/ingredients/name}"
+                                            id="idNameIngredientInput"
+                                        />
+                                        <Input
+                                            value="{create>/ingredients/quantity}"
+                                            id="idQuantityInput"
+                                        />
+                                        <Input
+                                            value="{create>/ingredients/uom}"
+                                            id="idUomInput"
+                                        />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
                     </f:content>
                 </f:SimpleForm>
             </VBox>
         </content>
+        <footer>
+            <OverflowToolbar
+                id="idOverflowToolbar"
+                visible="{create>/hasErrors}"
+            >
+                <Button
+                    id="idNrOfErrorsButton"
+                    icon="sap-icon://message-error"
+                    type="Negative"
+                    text="{create>/nrOfErrors}"
+                    press="onNrOfErrorsButtonPress"
+                />
+                <ToolbarSpacer id="idToolbarSpacer" />
+            </OverflowToolbar>
+        </footer>
     </Page>
 </mvc:View>

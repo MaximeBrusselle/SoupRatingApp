@@ -1,4 +1,5 @@
 import { IRating } from "./rating"
+import { IIngredient } from "./ingredient"
 
 export type ISoup = {
     ID: string
@@ -9,7 +10,7 @@ export type ISoup = {
     ratings: IRating[]
     avgRating: number
     ratingsCount: number
-    ingredients: string
+    ingredients: IIngredient[]
     isVeggie: number
     isSpicy: number
 }
