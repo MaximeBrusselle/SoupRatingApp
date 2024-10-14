@@ -62,12 +62,10 @@
                         id="idVerticalLayout"
                     >
                         <ObjectAttribute
-                            id="idFirstDayObjectAttribute"
                             title="First day of the week"
                             text="{masterInfo>/firstDay}"
                         />
                         <ObjectAttribute
-                            id="idLastDayObjectAttribute"
                             title="Last day of the week"
                             text="{masterInfo>/lastDay}"
                         />
@@ -79,7 +77,6 @@
                             id="idSoupsThisWeekObjectAttribute"
                         />
                         <ObjectStatus
-                            id="idYesNoObjectStatus"
                             text="{= 3 > 0 ? 'Yes' : 'No'}"
                             state="{= 3 > 0 ? 'Success' : 'Error'}"
                         />
