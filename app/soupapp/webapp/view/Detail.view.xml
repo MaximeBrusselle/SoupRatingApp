@@ -13,7 +13,9 @@
         upperCaseAnchorBar="false"
     >
         <uxap:headerTitle>
-            <uxap:ObjectPageDynamicHeaderTitle id="idObjectPageDynamicHeaderTitle">
+            <uxap:ObjectPageDynamicHeaderTitle
+                id="idObjectPageDynamicHeaderTitle"
+            >
                 <uxap:expandedHeading>
                     <Title
                         id="idNameDetailTitle"
@@ -235,7 +237,7 @@
                         id="idAvgRatingDetailRatingIndicator"
                         class="sapUiSmallMarginBottom"
                         value="{avgRating}"
-                        tooltip="Rating Tooltip"
+                        tooltip="The average rating"
                         displayOnly="true"
                         iconSize="32px"
                     />
@@ -325,14 +327,6 @@
                     <uxap:ObjectPageSubSection id="id2ObjectPageSubSection">
                         <uxap:blocks>
                             <VBox id="id7VBox">
-                                <FeedInput
-                                    id="idFeedInput"
-                                    post="onFeedInputPost"
-                                    icon="test-resources/sap/m/images/dronning_victoria.jpg"
-                                    class="sapUiSmallMarginTopBottom"
-                                    maxLength="111"
-                                    showExceededText="true"
-                                />
                                 <List
                                     id="idRatingsList"
                                     showSeparators="Inner"
@@ -353,6 +347,14 @@
                                 </List>
                             </VBox>
                         </uxap:blocks>
+                        <uxap:actions>
+                            <Button
+                                id="idPostReview2Button"
+                                text="Post Review"
+                                type="Emphasized"
+                                press="onPostReviewButtonPress"
+                            />
+                        </uxap:actions>
                     </uxap:ObjectPageSubSection>
                 </uxap:subSections>
             </uxap:ObjectPageSection>

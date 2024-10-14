@@ -1,0 +1,51 @@
+<c:FragmentDefinition
+    xmlns:form="sap.ui.layout.form"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+>
+    <Dialog title="Add Review">
+        <content>
+            <form:SimpleForm>
+                <form:content>
+                    <VBox width="100%">
+                        <Label
+                            id="idAddACommmentLabel"
+                            text="Add a commment"
+                        />
+                        <TextArea id="idCommentTextArea" maxLength="111" width="100%" value="{review>/comment}">
+                            <layoutData>
+                                <FlexItemData growFactor="1" />
+                            </layoutData>
+                        </TextArea>
+                    </VBox>
+                    <VBox>
+                        <Label
+                            id="idRatingLabel"
+                            text="Rating"
+                        />
+                        <RatingIndicator
+                            id="idScoreRatingIndicator"
+                            value="{review>/score}"
+                            iconSize="22px"
+                        />
+                    </VBox>
+                </form:content>
+            </form:SimpleForm>
+        </content>
+        <beginButton>
+            <Button
+                id="idSaveReviewButton"
+                text="Save"
+                press="onSaveButtonPress"
+                type="Emphasized"
+            />
+        </beginButton>
+        <endButton>
+            <Button
+                text="Cancel"
+                press="onCancelButtonPress"
+                type="Reject"
+            />
+        </endButton>
+    </Dialog>
+</c:FragmentDefinition>

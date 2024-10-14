@@ -3,6 +3,10 @@ import View from "sap/ui/core/mvc/View";
 import ODataListBinding from "sap/ui/model/odata/v2/ODataListBinding";
 import MessageBox from "sap/m/MessageBox";
 import Context from "sap/ui/model/Context";
+import Fragment from "sap/ui/core/Fragment";
+import Dialog from "sap/m/Dialog";
+import JSONModel from "sap/ui/model/json/JSONModel";
+import UI5Event from "sap/ui/base/Event";
 
 /**
  * @namespace soupapp.controller
@@ -10,10 +14,16 @@ import Context from "sap/ui/model/Context";
 export default class Detail extends BaseController {
 	private _soupId: string;
 	private _oView: View;
+	private _pDialog: Promise<Dialog> | null = null; // Holds reference to the fragment
 	/*eslint-disable @typescript-eslint/no-empty-function*/
 	public onInit(): void {
 		this._oView = this.getView() as View;
 		this.getRouter().getRoute("Detail")?.attachPatternMatched(this._onRouteMatched, this);
+		const reviewModel = new JSONModel({
+			comment: "",
+			score: 0,
+		});
+		this._oView.setModel(reviewModel, "review");
 	}
 
 	/**
@@ -29,42 +39,6 @@ export default class Detail extends BaseController {
 	}
 
 	/**
-	 * Called when the user posts a new rating.
-	 * @param {sap.ui.base.Event} oEvent the event with the comment
-	 * @public
-	 */
-	public onFeedInputPost(oEvent: any): void {
-		const comment = oEvent.getParameter("value");
-		// const score = oEvent.getParameter("score");
-		const score = 3;
-
-		const newData = {
-			soup_ID: this._soupId,
-			rating: score,
-			comment: comment,
-		};
-		console.log("🚀 ~ Detail ~ onFeedInputPost ~ newData:", newData);
-
-		const oBinding = this.getView()?.byId("idRatingsList")?.getBinding("items") as ODataListBinding;
-		const oContext = oBinding?.create(newData);
-		const that = this;
-
-		oContext?.created()?.then(
-			function success() {
-				console.log("🚀 ~ CreateRating ~ onFeedInputPost ~ Success ~ oContext:", oContext);
-				oEvent.getSource().setValue("");
-				that._oView.getElementBinding()?.getModel()?.refresh();
-			},
-			function failure(oError: any) {
-				console.error("🚀 ~ CreateRating ~ onFeedInputPost ~ Failure ~ oError:", oError);
-				if (!oError.canceled) {
-					throw oError; // unexpected error
-				}
-			}
-		);
-	}
-
-	/**
 	 * Called when the user clicks on the delete button.
 	 * Deletes the currently selected soup from the database.
 	 * @param {sap.ui.base.Event} oEvent the button press event
@@ -76,7 +50,6 @@ export default class Detail extends BaseController {
 
 		oBinding?.delete().then(
 			function success() {
-				console.log("🚀 ~ Detail ~ onDeleteButtonPress ~ success");
 				MessageBox.success(`Soup ${that._soupId} deleted`, {
 					title: "Soup successfully deleted",
 					onClose: function () {
@@ -134,7 +107,6 @@ export default class Detail extends BaseController {
 				rating: oBindingContext.getProperty(`ratings/${i}/rating`),
 			})) as RatingsListItem[],
 		};
-		console.log("🚀 ~ Detail ~ onCopyButtonPress ~ data:", JSON.stringify(data));
 		window.navigator.clipboard.writeText(JSON.stringify(data));
 	}
 
@@ -148,5 +120,83 @@ export default class Detail extends BaseController {
 	 */
 	private ratingTextFormatter(comment: string, rating: number): string {
 		return `${comment} - ${"⭐".repeat(rating)}`;
+	}
+
+	/**
+	 * Called when the user clicks on the "Post Review" button.
+	 * Opens the "Add Review" dialog to allow the user to enter a new rating.
+	 * @private
+	 */
+	private onPostReviewButtonPress(): void {
+		if (!this._pDialog) {
+			this._pDialog = Fragment.load({
+				name: "soupapp.view.AddReview",
+				controller: this,
+			}).then((oDialog: any) => {
+				this.getView()?.addDependent(oDialog);
+				return oDialog;
+			});
+		}
+
+		this._pDialog.then((oDialog: Dialog) => {
+			oDialog.open();
+		});
+	}
+
+	/**
+	 * Closes the Add Review dialog.
+	 * @private
+	 */
+	private onCloseDialog(): void {
+		this._pDialog?.then((oDialog: Dialog) => {
+			oDialog.close();
+		});
+	}
+
+	/**
+	 * Called when the user clicks on the "Save" button in the "Add Review" dialog.
+	 * Creates a new rating with the entered data and refreshes the ratings list.
+	 * @param {sap.ui.base.Event} _ the button press event
+	 * @private
+	 */
+	private onSaveButtonPress(_: UI5Event): void {
+		const comment = this._oView.getModel("review")?.getProperty("/comment");
+		const score = this._oView.getModel("review")?.getProperty("/score");
+
+		const newData = {
+			soup_ID: this._soupId,
+			rating: score,
+			comment: comment,
+		};
+
+		const oBinding = this.getView()?.byId("idRatingsList")?.getBinding("items") as ODataListBinding;
+		const oContext = oBinding?.create(newData);
+		const that = this;
+
+		oContext?.created()?.then(
+			function success() {
+				(that._oView?.getModel("review") as JSONModel).setProperty("/comment", "");
+				(that._oView?.getModel("review") as JSONModel).setProperty("/score", 0);
+				that._oView.getElementBinding()?.getModel()?.refresh();
+			},
+			function failure(oError: any) {
+				console.error("🚀 ~ CreateRating ~ onFeedInputPost ~ Failure ~ oError:", oError);
+				if (!oError.canceled) {
+					throw oError;
+				}
+			}
+		);
+		this.onCloseDialog();
+	}
+
+	/**
+	 * Called when the user clicks on the cancel button in the "Add Review" dialog.
+	 * Resets the review form and closes the dialog.
+	 * @private
+	 */
+	private onCancelButtonPress(): void {
+		(this._oView?.getModel("review") as JSONModel).setProperty("/comment", "");
+		(this._oView?.getModel("review") as JSONModel).setProperty("/score", 0);
+		this.onCloseDialog();
 	}
 }

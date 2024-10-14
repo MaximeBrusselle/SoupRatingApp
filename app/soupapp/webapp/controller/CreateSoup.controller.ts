@@ -104,7 +104,7 @@ export default class CreateSoup extends BaseController {
 		const oData = oModel.getData();
 		const oOdataModel = this.getView()?.getModel();
 		const oListBinding = oOdataModel?.bindList("/Soups") as ODataListBinding;
-	
+
 		const newData = {
 			name: oData.name,
 			shortDescr: oData.shortDescr,
@@ -114,28 +114,24 @@ export default class CreateSoup extends BaseController {
 			isSpicy: oData.isSpicy,
 			ratings: [],
 		};
-	
-		console.log("🚀 ~ CreateSoup ~ handleSavePress ~ newData:", newData);
-	
-		if (!this.validateData({...newData, ingredients: oData.ingredients})) {
+
+		if (!this.validateData({ ...newData, ingredients: oData.ingredients })) {
 			MessageBox.error("Make sure all fields are filled in correctly");
 			(this.getView()?.getModel("create") as JSONModel).refresh();
-			console.log((this.getView()?.getModel("create") as JSONModel).getData());
 			return;
 		}
-	
+
 		const oContext = oListBinding.create(newData);
 		const that = this;
-	
+
 		oContext?.created()?.then(
 			async function (oCreatedData: any) {
-				console.log("🚀 ~ CreateSoup ~ handleSavePress ~ oContext:", oContext);
 				const soupId = (oContext.getObject() as ISoup).ID;
-	
+
 				if (oData.ingredients && oData.ingredients.length > 0) {
 					await that.createIngredients(soupId, oData.ingredients);
 				}
-	
+
 				that.clearFields();
 				MessageBox.success(`Soup ${newData.name} created`, {
 					title: "Soup successfully created",
@@ -146,7 +142,6 @@ export default class CreateSoup extends BaseController {
 				});
 			},
 			function (oError: any) {
-				console.log("🚀 ~ CreateSoup ~ onSaveButtonPress ~ oError:", oError);
 				const errors = oError.getMessages().join("\n");
 				MessageBox.error(errors);
 				if (!oError.canceled) {
@@ -292,7 +287,6 @@ export default class CreateSoup extends BaseController {
 		oModel.setProperty("/nrOfErrors", errors.length);
 		oModel.setProperty("/hasErrors", !isValid);
 		oModel.refresh();
-		console.log("🚀 ~ CreateSoup ~ validateData ~ errors:", errors);
 		return isValid;
 	}
 
