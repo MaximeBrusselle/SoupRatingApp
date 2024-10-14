@@ -1,237 +1,237 @@
 <mvc:View
     controllerName="soupapp.controller.Detail"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.uxap"
-    xmlns:m="sap.m"
+    xmlns="sap.m"
+    xmlns:uxap="sap.uxap"
     displayBlock="true"
     height="100%"
     busyIndicatorDelay="0"
 >
-    <ObjectPageLayout
+    <uxap:ObjectPageLayout
         id="idObjectPageLayout"
         showTitleInHeaderContent="true"
         upperCaseAnchorBar="false"
     >
-        <headerTitle>
-            <ObjectPageDynamicHeaderTitle id="idObjectPageDynamicHeaderTitle">
-                <expandedHeading>
-                    <m:Title
+        <uxap:headerTitle>
+            <uxap:ObjectPageDynamicHeaderTitle id="idObjectPageDynamicHeaderTitle">
+                <uxap:expandedHeading>
+                    <Title
                         id="idNameDetailTitle"
                         text="{name}"
                         wrapping="true"
                     />
-                </expandedHeading>
+                </uxap:expandedHeading>
 
-                <snappedHeading>
-                    <m:VBox id="idVBox">
-                        <m:Title
+                <uxap:snappedHeading>
+                    <VBox id="idVBox">
+                        <Title
                             id="idNameDetailSnappedTitle"
                             text="{name}"
                             wrapping="true"
                         />
-                        <m:Label
+                        <Label
                             id="idShortDescrDetailLabel"
                             text="{shortDescr}"
                         />
-                    </m:VBox>
-                </snappedHeading>
+                    </VBox>
+                </uxap:snappedHeading>
 
-                <expandedContent>
-                    <m:Label
+                <uxap:expandedContent>
+                    <Label
                         id="idShortDescrDetailExpandedLabel"
                         text="{shortDescr}"
                     />
-                </expandedContent>
+                </uxap:expandedContent>
 
-                <snappedTitleOnMobile>
-                    <m:Title
+                <uxap:snappedTitleOnMobile>
+                    <Title
                         id="idNameMobileTitle"
                         text="{name}"
                     />
-                </snappedTitleOnMobile>
+                </uxap:snappedTitleOnMobile>
 
-                <actions>
-                    <m:Button
+                <uxap:actions>
+                    <Button
                         id="idEditButton"
                         text="Edit"
                         type="Emphasized"
                     />
-                    <m:Button
+                    <Button
                         id="idDeleteButton"
                         text="Delete"
                         press="onDeleteButtonPress"
                     />
-                    <m:Button
+                    <Button
                         id="idCopyButton"
                         text="Copy"
                         press="onCopyButtonPress"
                     />
-                    <m:OverflowToolbarButton
+                    <OverflowToolbarButton
                         id="idShareOverflowToolbarButton"
                         icon="sap-icon://action"
                         type="Transparent"
                         text="Share"
                         tooltip="action"
                     />
-                </actions>
-            </ObjectPageDynamicHeaderTitle>
-        </headerTitle>
+                </uxap:actions>
+            </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
 
-        <headerContent>
-            <m:FlexBox
+        <uxap:headerContent>
+            <FlexBox
                 id="idFlexBox"
                 wrap="Wrap"
                 fitContainer="true"
             >
-                <m:VBox
+                <VBox
                     id="id3VBox"
                     class="sapUiLargeMarginEnd sapUiSmallMarginBottom"
                 >
-                    <m:Title
+                    <Title
                         id="idSoupDetailsTitle"
                         class="sapUiTinyMarginBottom"
                         text="Soup Details"
                     />
 
-                    <m:HBox
+                    <HBox
                         id="id2HBox"
                         class="sapUiTinyMarginBottom"
                         renderType="Bare"
                     >
-                        <m:Label
+                        <Label
                             id="idDateServedLabel"
                             text="Date Served:"
                             class="sapUiTinyMarginEnd"
                         />
-                        <m:Text
+                        <Text
                             id="idDateText"
                             text=" {date}"
                         />
-                    </m:HBox>
+                    </HBox>
 
-                    <m:HBox
+                    <HBox
                         id="id3HBox"
                         class="sapUiTinyMarginBottom"
                         renderType="Bare"
                     >
-                        <m:Label
+                        <Label
                             id="idVeggieLabel"
                             text="Veggie:"
                             class="sapUiTinyMarginEnd"
                         />
-                        <m:ObjectStatus
+                        <ObjectStatus
                             id="idObjectStatus"
                             text="{= ${isVeggie} > 0 ? 'Yes' : 'No'}"
                             state="{= ${isVeggie} > 0 ? 'Success' : 'Error'}"
                         />
-                    </m:HBox>
+                    </HBox>
 
-                    <m:HBox id="id4HBox">
-                        <m:Label
+                    <HBox id="id4HBox">
+                        <Label
                             id="idSpicyLabel"
                             text="Spicy:"
                             class="sapUiTinyMarginEnd"
                         />
-                        <m:ObjectStatus
+                        <ObjectStatus
                             id="id2ObjectStatus"
                             text="{= ${isSpicy} > 0 ? 'Yes' : 'No'}"
                             state="{= ${isSpicy} > 0 ? 'Success' : 'Error'}"
                         />
-                    </m:HBox>
-                </m:VBox>
+                    </HBox>
+                </VBox>
 
-                <m:VBox
+                <VBox
                     id="id4VBox"
                     class="sapUiLargeMarginEnd sapUiSmallMarginBottom"
                 >
-                    <m:HBox
+                    <HBox
                         id="id5HBox"
                         class="sapUiTinyMarginBottom"
                     >
-                        <m:Label
+                        <Label
                             id="idCreatedByLabel"
                             text="Created By:"
                             class="sapUiSmallMarginEnd"
                         />
-                        <m:Text
+                        <Text
                             id="idCreatedByText"
                             text="{createdBy}"
                         />
-                    </m:HBox>
+                    </HBox>
 
-                    <m:HBox
+                    <HBox
                         id="id6HBox"
                         class="sapUiTinyMarginBottom"
                         renderType="Bare"
                     >
-                        <m:Label
+                        <Label
                             id="idCreatedOnLabel"
                             text="Created On:"
                             class="sapUiSmallMarginEnd"
                         />
-                        <m:Text
+                        <Text
                             id="idCreatedOnText"
                             text=" {createdAt}"
                         />
-                    </m:HBox>
+                    </HBox>
 
-                    <m:HBox
+                    <HBox
                         id="id7HBox"
                         class="sapUiTinyMarginBottom"
                     >
-                        <m:Label
+                        <Label
                             id="idChangedByLabel"
                             text="Changed By:"
                             class="sapUiSmallMarginEnd"
                         />
-                        <m:Text
+                        <Text
                             id="idModifiedByText"
                             text="{modifiedBy}"
                         />
-                    </m:HBox>
+                    </HBox>
 
-                    <m:HBox
+                    <HBox
                         id="id8HBox"
                         renderType="Bare"
                     >
-                        <m:Label
+                        <Label
                             id="idChangedOnLabel"
                             text="Changed On:"
                             class="sapUiSmallMarginEnd"
                         />
-                        <m:Text
+                        <Text
                             id="idModifiedAtText"
                             text=" {modifiedAt}"
                         />
-                    </m:HBox>
-                </m:VBox>
+                    </HBox>
+                </VBox>
 
-                <m:VBox
+                <VBox
                     id="id5VBox"
                     class="sapUiLargeMarginEnd sapUiSmallMarginBottom"
                 >
-                    <m:Title
+                    <Title
                         id="idDescriptionTitle"
                         text="Description"
                         class="sapUiTinyMarginBottom"
                     />
-                    <m:Text
+                    <Text
                         id="idLongDescrText"
                         width="320px"
                         text="{= ${longDescr} || 'No Description Provided'}"
                     />
-                </m:VBox>
+                </VBox>
 
-                <m:VBox
+                <VBox
                     id="id6VBox"
                     class="sapUiLargeMarginEnd sapUiSmallMarginBottom"
                 >
-                    <m:Title
+                    <Title
                         id="idAverageRatingRatingsCountRatingsTitle"
                         class="sapUiTinyMarginBottom"
                         text="Average Rating ({ratingsCount} ratings)"
                     />
-                    <m:RatingIndicator
+                    <RatingIndicator
                         id="idAvgRatingDetailRatingIndicator"
                         class="sapUiSmallMarginBottom"
                         value="{avgRating}"
@@ -239,93 +239,93 @@
                         displayOnly="true"
                         iconSize="32px"
                     />
-                </m:VBox>
-            </m:FlexBox>
-        </headerContent>
-        <sections>
-            <ObjectPageSection
+                </VBox>
+            </FlexBox>
+        </uxap:headerContent>
+        <uxap:sections>
+            <uxap:ObjectPageSection
                 id="idObjectPageSection"
                 anchorBarButtonColor="Positive"
                 titleUppercase="false"
                 title="Ingredients"
             >
-                <subSections>
-                    <ObjectPageSubSection id="idObjectPageSubSection">
-                        <blocks>
-                            <m:Table
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection id="idObjectPageSubSection">
+                        <uxap:blocks>
+                            <Table
                                 id="idIngredientsDetailTable"
                                 items="{ingredients}"
                             >
-                                <m:columns>
-                                    <m:Column
+                                <columns>
+                                    <Column
                                         minScreenWidth="Tablet"
                                         demandPopin="true"
                                         id="idNameColumn"
                                     >
-                                        <m:Text
+                                        <Text
                                             text="Name"
                                             id="idNameText"
                                         />
-                                    </m:Column>
-                                    <m:Column
+                                    </Column>
+                                    <Column
                                         minScreenWidth="Tablet"
                                         demandPopin="true"
                                         id="idQuantityColumn"
                                     >
-                                        <m:Text
+                                        <Text
                                             text="Quantity"
                                             id="idQuantityText"
                                         />
-                                    </m:Column>
-                                    <m:Column
+                                    </Column>
+                                    <Column
                                         minScreenWidth="Tablet"
                                         demandPopin="true"
                                         id="idUOMColumn"
                                     >
-                                        <m:Text
+                                        <Text
                                             text="UOM"
                                             id="idUOMText"
                                         />
-                                    </m:Column>
-                                </m:columns>
+                                    </Column>
+                                </columns>
 
-                                <m:items>
-                                    <m:ColumnListItem
+                                <items>
+                                    <ColumnListItem
                                         vAlign="Middle"
                                         id="id2ColumnListItem"
                                     >
-                                        <m:cells>
-                                            <m:Text
+                                        <cells>
+                                            <Text
                                                 text="{name}"
                                                 id="idName2Text"
                                             />
-                                            <m:Text
+                                            <Text
                                                 text="{quantity}"
                                                 id="idQuantity2Text"
                                             />
-                                            <m:Text
+                                            <Text
                                                 text="{uom}"
                                                 id="idUomText"
                                             />
-                                        </m:cells>
-                                    </m:ColumnListItem>
-                                </m:items>
-                            </m:Table>
-                        </blocks>
-                    </ObjectPageSubSection>
-                </subSections>
-            </ObjectPageSection>
-            <ObjectPageSection
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+            <uxap:ObjectPageSection
                 id="id2ObjectPageSection"
                 anchorBarButtonColor="Critical"
                 titleUppercase="false"
                 title="Reviews"
             >
-                <subSections>
-                    <ObjectPageSubSection id="id2ObjectPageSubSection">
-                        <blocks>
-                            <m:VBox id="id7VBox">
-                                <m:FeedInput
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection id="id2ObjectPageSubSection">
+                        <uxap:blocks>
+                            <VBox id="id7VBox">
+                                <FeedInput
                                     id="idFeedInput"
                                     post="onFeedInputPost"
                                     icon="test-resources/sap/m/images/dronning_victoria.jpg"
@@ -333,7 +333,7 @@
                                     maxLength="111"
                                     showExceededText="true"
                                 />
-                                <m:List
+                                <List
                                     id="idRatingsList"
                                     showSeparators="Inner"
                                     items="{
@@ -342,7 +342,7 @@
                                     }"
                                     noDataText="No Ratings Yet"
                                 >
-                                    <m:FeedListItem
+                                    <FeedListItem
                                         id="idCommentFeedListItem"
                                         sender="{createdBy}"
                                         info="Review"
@@ -350,12 +350,12 @@
                                         text="{parts: [{path: 'comment'}, {path: 'rating'}], formatter: '.ratingTextFormatter'}"
                                         convertLinksToAnchorTags="All"
                                     />
-                                </m:List>
-                            </m:VBox>
-                        </blocks>
-                    </ObjectPageSubSection>
-                </subSections>
-            </ObjectPageSection>
-        </sections>
-    </ObjectPageLayout>
+                                </List>
+                            </VBox>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+    </uxap:ObjectPageLayout>
 </mvc:View>
