@@ -209,15 +209,15 @@
                                 >
                                     <cells>
                                         <Input
-                                            value="{create>/ingredients/name}"
+                                            value="{create>name}"
                                             id="idNameIngredientInput"
                                         />
                                         <Input
-                                            value="{create>/ingredients/quantity}"
+                                            value="{create>quantity}"
                                             id="idQuantityInput"
                                         />
                                         <Input
-                                            value="{create>/ingredients/uom}"
+                                            value="{create>uom}"
                                             id="idUomInput"
                                         />
                                     </cells>

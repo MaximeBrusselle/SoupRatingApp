@@ -23,7 +23,7 @@ export default class Detail extends BaseController {
 	 */
 	private _onRouteMatched(oEvent: any): void {
 		this._soupId = oEvent.getParameter("arguments").ID;
-		this._oView.bindElement(`/Soup(${this._soupId})`, {
+		this._oView.bindElement(`/Soups(${this._soupId})`, {
 			$expand: "ratings,ingredients",
 		});
 	}

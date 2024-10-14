@@ -99,9 +99,9 @@
                         icon="sap-icon://home"
                     >
                         <f:GridList
-                            id="idSoupGridList"
+                            id="idSoupsGridList"
                             items="{ 
-                                path: '/Soup', 
+                                path: '/Soups', 
                                 parameters: {
                                     $expand: 'ratings', 
                                     $select: 'ID,name,shortDescr,date,avgRating,isVeggie,isSpicy', 

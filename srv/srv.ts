@@ -3,7 +3,7 @@ import { ISoup } from "./entities/soup";
 import { IRating } from "./entities/rating";
 
 export = (srv: cds.Service) => {
-    srv.after("READ", "Soup", (soups: ISoup[]) => {
+    srv.after("READ", "Soups", (soups: ISoup[]) => {
         console.log(soups);
         
         return soups.map(async (soup: ISoup) => {

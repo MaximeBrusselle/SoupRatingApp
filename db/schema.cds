@@ -5,7 +5,7 @@ using {
 
 namespace flexso.cap.soup;
 
-entity Soup : cuid, managed {
+entity Soups : cuid, managed {
     name         : String(111)  @mandatory  @assert.range: {
         minLength: 1,
         maxLength: 111
@@ -16,9 +16,9 @@ entity Soup : cuid, managed {
     };
     longDescr    : String(500)  @assert.range: {maxLength: 500};
     date         : Date         @mandatory;
-    ratings      : Association to many Rating
+    ratings      : Association to many Ratings
                        on ratings.soup = $self;
-    ingredients  : Association to many Ingredient
+    ingredients  : Association to many Ingredients
                        on ingredients.soup = $self;
     avgRating    : Double;
     ratingsCount : Integer;
@@ -26,14 +26,14 @@ entity Soup : cuid, managed {
     isSpicy      : Integer;
 }
 
-entity Rating : cuid, managed {
-    soup    : Association to Soup;
+entity Ratings : cuid, managed {
+    soup    : Association to Soups;
     rating  : Integer     @Validation.Minimum: 0  @Validation.Maximum: 5  @mandatory;
     comment : String(111) @assert.range      : {maxLength: 111};
 }
 
-entity Ingredient : cuid, managed {
-    soup     : Association to Soup;
+entity Ingredients : cuid, managed {
+    soup     : Association to Soups;
     name     : String(111)  @mandatory  @assert.range: {
         minLength: 1,
         maxLength: 111

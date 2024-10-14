@@ -33,7 +33,7 @@ export default class Master extends BaseController {
 		const weekSoups = this.byId("idSoup2GridList") as any;
 		const template = this.getView()?.byId("idGridListItem") as UI5Element;
 		weekSoups.bindItems({
-			path: "/Soup", 
+			path: "/Soups", 
 			parameters: { 
 				$expand: "ratings", 
 				$select: 'ID,name,shortDescr,date,avgRating,isVeggie,isSpicy', 

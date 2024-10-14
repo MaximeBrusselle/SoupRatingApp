@@ -1,7 +1,7 @@
 using {flexso.cap.soup as my} from '../db/schema';
 
 service SoupService {
-    entity Soup   as projection on my.Soup;
-    entity Rating as projection on my.Rating;
-    entity Ingredient as projection on my.Ingredient;
+    entity Soups   as projection on my.Soups;
+    entity Ratings as projection on my.Ratings;
+    entity Ingredients as projection on my.Ingredients;
 }

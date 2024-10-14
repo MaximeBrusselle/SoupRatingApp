@@ -12,6 +12,7 @@ import Button from "sap/m/Button";
 import Bar from "sap/m/Bar";
 import Title from "sap/m/Title";
 import Table from "sap/m/Table";
+import { ISoup } from "soupapp/model/soup";
 type SoupIngredient = {
 	name: string;
 	quantity: string;
@@ -46,7 +47,13 @@ export default class CreateSoup extends BaseController {
 			name: "",
 			shortDescr: "",
 			longDescr: "",
-			ingredients: [],
+			ingredients: [
+				{
+					name: "",
+					quantity: "",
+					uom: "",
+				},
+			],
 			date: new Date(),
 			isVeggie: false,
 			isSpicy: false,
@@ -86,36 +93,49 @@ export default class CreateSoup extends BaseController {
 		});
 	}
 
+	/**
+	 * Called when the user clicks on the "Save" button.
+	 * Creates a new soup with the entered data and navigates to the master page.
+	 * @public
+	 * @returns {void}
+	 */
 	public onSaveButtonPress(): void {
 		const oModel = this.getView()?.getModel("create") as JSONModel;
 		const oData = oModel.getData();
 		const oOdataModel = this.getView()?.getModel();
-		const oListBinding = oOdataModel?.bindList("/Soup") as ODataListBinding;
+		const oListBinding = oOdataModel?.bindList("/Soups") as ODataListBinding;
+	
 		const newData = {
 			name: oData.name,
 			shortDescr: oData.shortDescr,
 			longDescr: oData.longDescr,
-			ingredients: oData.ingredients,
 			date: oData.date.toISOString().slice(0, 10),
 			isVeggie: oData.isVeggie,
 			isSpicy: oData.isSpicy,
 			ratings: [],
 		};
+	
 		console.log("🚀 ~ CreateSoup ~ handleSavePress ~ newData:", newData);
-		if (!this.validateData(newData)) {
+	
+		if (!this.validateData({...newData, ingredients: oData.ingredients})) {
 			MessageBox.error("Make sure all fields are filled in correctly");
 			(this.getView()?.getModel("create") as JSONModel).refresh();
 			console.log((this.getView()?.getModel("create") as JSONModel).getData());
-
 			return;
 		}
-
+	
 		const oContext = oListBinding.create(newData);
 		const that = this;
-
+	
 		oContext?.created()?.then(
-			function () {
+			async function (oCreatedData: any) {
 				console.log("🚀 ~ CreateSoup ~ handleSavePress ~ oContext:", oContext);
+				const soupId = (oContext.getObject() as ISoup).ID;
+	
+				if (oData.ingredients && oData.ingredients.length > 0) {
+					await that.createIngredients(soupId, oData.ingredients);
+				}
+	
 				that.clearFields();
 				MessageBox.success(`Soup ${newData.name} created`, {
 					title: "Soup successfully created",
@@ -134,6 +154,30 @@ export default class CreateSoup extends BaseController {
 				}
 			}.bind(this)
 		);
+	}
+
+	/**
+	 * Creates the ingredients for a given soup
+	 * @param {string} soupId ID of the soup to link the ingredients to
+	 * @param {Array} ingredients List of ingredients to create
+	 * @returns {Promise<void>} Promise that resolves when all ingredients are created
+	 * @private
+	 */
+	private async createIngredients(soupId: string, ingredients: any[]): Promise<void> {
+		const oOdataModel = this.getView()?.getModel();
+		const oIngredientsBinding = oOdataModel?.bindList("/Ingredients") as ODataListBinding;
+
+		for (const ingredient of ingredients) {
+			const ingredientData = {
+				soup_ID: soupId, // Link the ingredient to the created Soup
+				name: ingredient.name,
+				quantity: ingredient.quantity,
+				uom: ingredient.uom,
+			};
+
+			const oContext = oIngredientsBinding.create(ingredientData);
+			await oContext?.created(); // Ensure each ingredient is created
+		}
 	}
 
 	/**
@@ -190,7 +234,7 @@ export default class CreateSoup extends BaseController {
 			});
 			isValid = false;
 		}
-		const rows = (this.byId("idIngredientsTable")as Table).getItems();
+		const rows = (this.byId("idIngredientsTable") as Table).getItems();
 		for (let i = 0; i < newData.ingredients.length; i++) {
 			const row: any = rows[i];
 			if (newData.ingredients[i].name.length < 1 || newData.ingredients[i].name.length > 111) {
@@ -278,6 +322,9 @@ export default class CreateSoup extends BaseController {
 			date: new Date(),
 			isVeggie: false,
 			isSpicy: false,
+			errors: [],
+			hasErrors: false,
+			nrOfErrors: 0,
 		});
 		(this.getView()?.byId("idNameInput") as Input).setValueState("None");
 		(this.getView()?.byId("idShortDescrInput") as Input).setValueState("None");
